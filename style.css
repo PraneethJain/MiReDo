@@ -11,6 +11,9 @@
   align-items: center;
 }
 
+.filled {
+  background-color: pink !important;
+}
 .container div div {
   width: 10rem;
   height: 10rem;
@@ -23,32 +26,6 @@
 .container div div:hover {
   background-color: rgba(0, 0, 0, 0.75);
   transform: scale(1.1);
-}
-
-.col1 .row1:active {
-  background-color: red;
-}
-
-.col1 .row2:active {
-  background-color: red;
-}
-.col1 .row3:active {
-  background-color: red;
-}
-.col2 .row1:active {
-  background-color: red;
-}
-.col2 .row3:active {
-  background-color: red;
-}
-.col3 .row1:active {
-  background-color: red;
-}
-.col3 .row2:active {
-  background-color: red;
-}
-.col3 .row3:active {
-  background-color: red;
 }
 
 .logo {
