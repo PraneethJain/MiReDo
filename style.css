@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container div div {
+  width: 10rem;
+  height: 10rem;
+  background-color: black;
+  margin: 2rem 1rem;
+  border-radius: 20%;
+  transition: background-color 200ms, transform 250ms;
+}
+
+.container div div:hover {
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: scale(1.1);
+}
+
+.col1 .row1:active {
+  background-color: red;
+}
+
+.col1 .row2:active {
+  background-color: red;
+}
+.col1 .row3:active {
+  background-color: red;
+}
+.col2 .row1:active {
+  background-color: red;
+}
+.col2 .row3:active {
+  background-color: red;
+}
+.col3 .row1:active {
+  background-color: red;
+}
+.col3 .row2:active {
+  background-color: red;
+}
+.col3 .row3:active {
+  background-color: red;
+}
+
+.logo {
+  width: 10rem;
+  height: 10rem;
+  transform: translateX(1rem);
+}
