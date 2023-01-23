@@ -1,4 +1,5 @@
 let LEVEL = 3;
+let level_count = LEVEL - 1;
 let delay = 400;
 
 // Utility Functions
@@ -112,8 +113,14 @@ function click_note(i) {
 
 const nextLevel = () => {
   correct_order = [];
-  counter = LEVEL;
   black_all();
+  if (level_count > 0) {
+    level_count -= 1;
+  } else {
+    LEVEL += 1;
+    level_count = LEVEL - 1;
+  }
+  counter = LEVEL;
   level(LEVEL);
 };
 
