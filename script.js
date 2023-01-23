@@ -23,6 +23,32 @@ function shuffle(array) {
   return array;
 }
 
+function fade_out(element) {
+  var op = 1;
+  var timer = setInterval(function () {
+    if (op <= 0.1) {
+      clearInterval(timer);
+      element.style.display = "none";
+    }
+    element.style.opacity = op;
+    element.style.filter = "alpha(opacity=" + op * 100 + ")";
+    op -= op * 0.1;
+  }, 50);
+}
+
+function fade_in(element) {
+  var op = 0.1;
+  element.style.display = "block";
+  var timer = setInterval(function () {
+    if (op >= 1) {
+      clearInterval(timer);
+    }
+    element.style.opacity = op;
+    element.style.filter = "alpha(opacity=" + op * 100 + ")";
+    op += op * 0.1;
+  }, 10);
+}
+
 let sounds = [];
 for (let i = 1; i <= 8; ++i) {
   sounds.push(new Audio(`./sounds/${i}.mp3`));
@@ -60,6 +86,16 @@ function click_note(i) {
   sounds[x].play();
 }
 
+let delay = 400;
+
+let start_page = document.querySelector(".start");
+let container = document.querySelector(".container");
+start_page.addEventListener("click", (e) => {
+  fade_out(start_page);
+  setTimeout(game, delay * 4);
+  setTimeout(end, delay * (n + 6));
+});
+
 let notes = document.querySelectorAll(".container div div");
 let notes_arr = turnObjToArray(notes);
 
@@ -73,7 +109,6 @@ for (let i = 0; i < 8; ++i) {
 }
 
 let n = 4;
-let delay = 400;
 const selected_notes = shuffle(notes_arr).slice(0, n);
 
 function game() {
@@ -90,6 +125,3 @@ const end = () => {
     note.classList.remove("filled");
   });
 };
-
-game();
-setTimeout(end, delay * (n + 2));
