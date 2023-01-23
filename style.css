@@ -42,14 +42,23 @@ body {
   font-size: 3rem;
 }
 
-.container {
+.game {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+.score {
+  font-size: 4rem;
+}
 .filled {
   background-color: pink !important;
   pointer-events: none;

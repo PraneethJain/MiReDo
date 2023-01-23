@@ -103,6 +103,7 @@ function click_note(i) {
     }
 
     if (counter == 0) {
+      score.textContent = (parseInt(score.textContent) + LEVEL).toString();
       disable_notes();
       setTimeout(nextLevel, 1500);
     }
@@ -126,13 +127,15 @@ const nextLevel = () => {
 
 let start_page = document.querySelector(".start");
 let container = document.querySelector(".container");
+let notes = document.querySelectorAll(".container div div");
+let score = document.querySelector(".score");
+
 start_page.addEventListener("click", (e) => {
   disable_notes();
   fade_out(start_page);
   setTimeout(level.bind(null, LEVEL), delay * 4);
 });
 
-let notes = document.querySelectorAll(".container div div");
 let notes_arr = turnObjToArray(notes);
 let clicked = [];
 let correct_order = [];
