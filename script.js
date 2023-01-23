@@ -98,8 +98,12 @@ function click_note(i) {
   if (!generating_level) {
     counter -= 1;
     if (i != correct_order[counter]) {
-      // Reset here ok
-      console.log("Get fucked");
+      fade_out(container);
+      score.innerHTML =
+        "You lose <br>" + score.textContent + "<br> <br> Click here to restart";
+      score.addEventListener("click", (e) => {
+        location.reload();
+      });
     }
 
     if (counter == 0) {
