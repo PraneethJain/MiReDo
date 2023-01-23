@@ -23,54 +23,73 @@ function shuffle(array) {
   return array;
 }
 
-let notes = document.querySelectorAll(".container div div");
-let notes_arr = turnObjToArray(notes);
+let sounds = [];
+for (let i = 1; i <= 8; ++i) {
+  sounds.push(new Audio(`./sounds/${i}.mp3`));
+}
 
-console.log(notes);
-
-for (let i = 0; i < 8; ++i) {
-  let note = notes[i];
+function click_note(i) {
   let x = -1;
   switch (i) {
     case 0:
-      x = 1;
+      x = 0;
       break;
     case 1:
-      x = 8;
-      break;
-    case 2:
       x = 7;
       break;
-    case 3:
-      x = 2;
-      break;
-    case 4:
+    case 2:
       x = 6;
       break;
+    case 3:
+      x = 1;
+      break;
+    case 4:
+      x = 5;
+      break;
     case 5:
-      x = 3;
+      x = 2;
       break;
     case 6:
-      x = 4;
+      x = 3;
       break;
     case 7:
-      x = 5;
+      x = 4;
       break;
   }
 
-  let cur_sound = new Audio(`./sounds/${x}.mp3`);
+  sounds[x].play();
+}
+
+let notes = document.querySelectorAll(".container div div");
+let notes_arr = turnObjToArray(notes);
+
+for (let i = 0; i < 8; ++i) {
+  let note = notes[i];
 
   note.addEventListener("click", (e) => {
-    cur_sound.play();
+    note.classList.add("filled");
+    click_note(i);
   });
 }
 
-let n = 3;
+let n = 4;
+let delay = 400;
 const selected_notes = shuffle(notes_arr).slice(0, n);
 
-selected_notes.forEach((note) => {
-  console.log(note);
-  console.log(note.classList);
-  note.classList.add("filled");
-  console.log(note.classList);
-});
+function game() {
+  n -= 1;
+  if (n >= 0) {
+    let note = selected_notes[n];
+    note.click();
+    setTimeout(game, delay);
+  }
+}
+
+const end = () => {
+  selected_notes.forEach((note) => {
+    note.classList.remove("filled");
+  });
+};
+
+game();
+setTimeout(end, delay * (n + 2));
