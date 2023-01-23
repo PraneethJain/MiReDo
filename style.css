@@ -9,6 +9,12 @@
   font-family: muzik;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 .start {
   width: 100vw;
   height: 100vh;
@@ -20,12 +26,20 @@
   font-size: 5rem;
   letter-spacing: 0.6rem;
   user-select: none;
+  text-align: center;
 }
 
 .start .tut {
-  font-family: sans-serif;
+  font-family: "Lacquer", cursive;
   letter-spacing: normal;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-top: 7rem;
+}
+
+.start .cont {
+  font-family: "Lacquer", cursive;
+  margin-top: 7rem;
+  font-size: 3rem;
 }
 
 .container {

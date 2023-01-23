@@ -36,19 +36,6 @@ function fade_out(element) {
   }, 50);
 }
 
-function fade_in(element) {
-  var op = 0.1;
-  element.style.display = "block";
-  var timer = setInterval(function () {
-    if (op >= 1) {
-      clearInterval(timer);
-    }
-    element.style.opacity = op;
-    element.style.filter = "alpha(opacity=" + op * 100 + ")";
-    op += op * 0.1;
-  }, 10);
-}
-
 let sounds = [];
 for (let i = 1; i <= 8; ++i) {
   sounds.push(new Audio(`./sounds/${i}.mp3`));
@@ -92,8 +79,7 @@ let start_page = document.querySelector(".start");
 let container = document.querySelector(".container");
 start_page.addEventListener("click", (e) => {
   fade_out(start_page);
-  setTimeout(game, delay * 4);
-  setTimeout(end, delay * (n + 6));
+  setTimeout(level, delay * 4);
 });
 
 let notes = document.querySelectorAll(".container div div");
@@ -108,20 +94,25 @@ for (let i = 0; i < 8; ++i) {
   });
 }
 
-let n = 4;
-const selected_notes = shuffle(notes_arr).slice(0, n);
+let n = 3;
 
-function game() {
+const stage = () => {
   n -= 1;
   if (n >= 0) {
     let note = selected_notes[n];
     note.click();
-    setTimeout(game, delay);
+    setTimeout(stage, delay);
   }
-}
+};
 
 const end = () => {
   selected_notes.forEach((note) => {
     note.classList.remove("filled");
   });
+};
+
+const level = () => {
+  window.selected_notes = shuffle(notes_arr).slice(0, n);
+  stage();
+  setTimeout(end, delay * (n + 2));
 };
