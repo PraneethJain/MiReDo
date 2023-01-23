@@ -99,8 +99,7 @@ function click_note(i) {
     counter -= 1;
     if (i != correct_order[counter]) {
       fade_out(container);
-      score.innerHTML =
-        "You lose <br>" + score.textContent + "<br> <br> Click here to restart";
+      score.innerHTML = score.textContent + "<br> Click here to restart";
       score.addEventListener("click", (e) => {
         location.reload();
       });

@@ -65,8 +65,8 @@ body {
   pointer-events: none;
 }
 .container div div {
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8rem;
   background-color: black;
   margin: 2rem 1rem;
   border-radius: 20%;
@@ -79,8 +79,8 @@ body {
 }
 
 .logo {
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8rem;
   transform: translateX(1rem);
 }
 
