@@ -1,6 +1,8 @@
 let LEVEL = 3;
 let level_count = LEVEL - 1;
 const delay = 400;
+let generating_level = false;
+let counter = LEVEL;
 const colors = [
   "#e0aaff",
   "#c77dff",
@@ -12,6 +14,12 @@ const colors = [
   "#10002b",
 ];
 let color_count = 0;
+let clicked = [];
+let correct_order = [];
+let sounds = [];
+for (let i = 1; i <= 8; ++i) {
+  sounds.push(new Audio(`./sounds/${i}.mp3`));
+}
 
 const turnObjToArray = function (obj) {
   return [].map.call(obj, function (element) {
@@ -69,12 +77,6 @@ const black_all = () => {
   });
 };
 
-let sounds = [];
-for (let i = 1; i <= 8; ++i) {
-  sounds.push(new Audio(`./sounds/${i}.mp3`));
-}
-let generating_level = false;
-let counter = LEVEL;
 const click_note = (i) => {
   let x = -1;
   switch (i) {
@@ -106,7 +108,10 @@ const click_note = (i) => {
 
   sounds[x].play();
 
-  if (!generating_level) {
+  if (generating_level) {
+    correct_order.push(i);
+    notes[i].style.backgroundColor = colors[color_count++];
+  } else {
     let flag = true;
     counter -= 1;
     if (i != correct_order[counter]) {
@@ -125,9 +130,6 @@ const click_note = (i) => {
       disable_notes();
       setTimeout(nextLevel, 1500);
     }
-  } else {
-    correct_order.push(i);
-    notes[i].style.backgroundColor = colors[color_count++];
   }
 };
 
@@ -151,11 +153,12 @@ const nextLevel = () => {
 
 let start_page = document.querySelector(".start");
 let container = document.querySelector(".container");
-let notes = document.querySelectorAll(".container div div");
 let score = document.querySelector(".score");
 let game = document.querySelector(".game");
 let points = document.querySelector(".points");
 let over = document.querySelector(".over");
+let notes = document.querySelectorAll(".container div div");
+let notes_arr = turnObjToArray(notes);
 
 over.addEventListener("click", (e) => {
   location.reload();
@@ -167,10 +170,6 @@ start_page.addEventListener("click", (e) => {
   fade_out(start_page);
   setTimeout(level.bind(null, LEVEL), delay * 4);
 });
-
-let notes_arr = turnObjToArray(notes);
-let clicked = [];
-let correct_order = [];
 
 for (let i = 0; i < 8; ++i) {
   let note = notes[i];
