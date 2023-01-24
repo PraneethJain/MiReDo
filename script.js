@@ -98,6 +98,7 @@ function click_note(i) {
   if (!generating_level) {
     counter -= 1;
     if (i != correct_order[counter]) {
+      disable_notes();
       fade_out(game);
       points.textContent = score.textContent;
     }
@@ -138,6 +139,7 @@ over.addEventListener("click", (e) => {
 });
 
 start_page.addEventListener("click", (e) => {
+  start_page.style["pointer-events"] = "none";
   disable_notes();
   fade_out(start_page);
   setTimeout(level.bind(null, LEVEL), delay * 4);
