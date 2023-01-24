@@ -113,6 +113,7 @@ const click_note = (i) => {
       flag = false;
       notes[i].style.backgroundColor = "red";
       notes[correct_order[counter]].style.backgroundColor = colors[color_count];
+      notes[correct_order[counter]].classList.add("ds");
       disable_notes();
       setTimeout(endLevel, 1500);
     } else {

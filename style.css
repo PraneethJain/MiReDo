@@ -12,7 +12,7 @@
 html,
 body {
   height: 100%;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .start {
@@ -61,7 +61,6 @@ body {
   font-size: 4rem;
 }
 .filled {
-  /* background-color: pink !important; */
   pointer-events: none;
 }
 
@@ -76,6 +75,10 @@ body {
 
 .container div div:hover {
   background-color: rgba(0, 0, 0, 0.75);
+  transform: scale(1.1);
+}
+
+.ds {
   transform: scale(1.1);
 }
 
