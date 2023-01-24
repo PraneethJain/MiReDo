@@ -61,9 +61,10 @@ body {
   font-size: 4rem;
 }
 .filled {
-  background-color: pink !important;
+  /* background-color: pink !important; */
   pointer-events: none;
 }
+
 .container div div {
   width: 8rem;
   height: 8rem;

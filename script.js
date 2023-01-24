@@ -1,8 +1,17 @@
 let LEVEL = 3;
 let level_count = LEVEL - 1;
-let delay = 400;
-
-// Utility Functions
+const delay = 400;
+const colors = [
+  "#e0aaff",
+  "#c77dff",
+  "#9d4edd",
+  "#7b2cbf",
+  "#5a189a",
+  "#3c096c",
+  "#240046",
+  "#10002b",
+];
+let color_count = 0;
 
 const turnObjToArray = function (obj) {
   return [].map.call(obj, function (element) {
@@ -10,7 +19,7 @@ const turnObjToArray = function (obj) {
   });
 };
 
-function shuffle(array) {
+const shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;
 
@@ -25,9 +34,9 @@ function shuffle(array) {
   }
 
   return array;
-}
+};
 
-function fade_out(element) {
+const fade_out = (element) => {
   var op = 1;
   var timer = setInterval(function () {
     if (op <= 0.1) {
@@ -38,7 +47,7 @@ function fade_out(element) {
     element.style.filter = "alpha(opacity=" + op * 100 + ")";
     op -= op * 0.1;
   }, 50);
-}
+};
 
 const disable_notes = () => {
   notes_arr.forEach((note) => {
@@ -55,6 +64,8 @@ const enable_notes = () => {
 const black_all = () => {
   notes_arr.forEach((note) => {
     note.classList.remove("filled");
+    note.style.backgroundColor = "black";
+    color_count = 0;
   });
 };
 
@@ -64,7 +75,7 @@ for (let i = 1; i <= 8; ++i) {
 }
 let generating_level = false;
 let counter = LEVEL;
-function click_note(i) {
+const click_note = (i) => {
   let x = -1;
   switch (i) {
     case 0:
@@ -96,22 +107,33 @@ function click_note(i) {
   sounds[x].play();
 
   if (!generating_level) {
+    let flag = true;
     counter -= 1;
     if (i != correct_order[counter]) {
+      flag = false;
+      notes[i].style.backgroundColor = "red";
+      notes[correct_order[counter]].style.backgroundColor = colors[color_count];
       disable_notes();
-      fade_out(game);
-      points.textContent = score.textContent;
+      setTimeout(endLevel, 1500);
+    } else {
+      notes[i].style.backgroundColor = colors[color_count--];
     }
 
-    if (counter == 0) {
+    if (counter == 0 && flag) {
       score.textContent = (parseInt(score.textContent) + LEVEL).toString();
       disable_notes();
       setTimeout(nextLevel, 1500);
     }
   } else {
     correct_order.push(i);
+    notes[i].style.backgroundColor = colors[color_count++];
   }
-}
+};
+
+const endLevel = () => {
+  fade_out(game);
+  points.textContent = score.textContent;
+};
 
 const nextLevel = () => {
   correct_order = [];
@@ -170,6 +192,7 @@ const setup = (n) => {
 const end = () => {
   selected_notes.forEach((note) => {
     note.classList.remove("filled");
+    note.style.backgroundColor = "black";
   });
   enable_notes();
   clicked = [];
