@@ -98,11 +98,8 @@ function click_note(i) {
   if (!generating_level) {
     counter -= 1;
     if (i != correct_order[counter]) {
-      fade_out(container);
-      score.innerHTML = score.textContent + "<br> Click here to restart";
-      score.addEventListener("click", (e) => {
-        location.reload();
-      });
+      fade_out(game);
+      points.textContent = score.textContent;
     }
 
     if (counter == 0) {
@@ -132,6 +129,13 @@ let start_page = document.querySelector(".start");
 let container = document.querySelector(".container");
 let notes = document.querySelectorAll(".container div div");
 let score = document.querySelector(".score");
+let game = document.querySelector(".game");
+let points = document.querySelector(".points");
+let over = document.querySelector(".over");
+
+over.addEventListener("click", (e) => {
+  location.reload();
+});
 
 start_page.addEventListener("click", (e) => {
   disable_notes();
