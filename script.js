@@ -117,7 +117,7 @@ const click_note = (i) => {
       disable_notes();
       setTimeout(endLevel, 1500);
     } else {
-      notes[i].style.backgroundColor = colors[color_count--];
+      notes[i].style.backgroundColor = colors[--color_count];
     }
 
     if (counter == 0 && flag) {
