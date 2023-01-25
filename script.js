@@ -20,6 +20,8 @@ let sounds = [];
 for (let i = 1; i <= 8; ++i) {
   sounds.push(new Audio(`./sounds/${i}.mp3`));
 }
+let win_sound = new Audio("./sounds/win.m4a");
+let lose_sound = new Audio("./sounds/lose.m4a");
 
 const turnObjToArray = function (obj) {
   return [].map.call(obj, function (element) {
@@ -67,6 +69,10 @@ const enable_notes = () => {
   notes_arr.forEach((note) => {
     note.style["pointer-events"] = "auto";
   });
+};
+
+const play_sound = (sound) => {
+  sound.play();
 };
 
 const black_all = () => {
@@ -120,6 +126,7 @@ const click_note = (i) => {
       notes[correct_order[counter]].style.backgroundColor = colors[color_count];
       notes[correct_order[counter]].classList.add("ds");
       disable_notes();
+      setTimeout(play_sound.bind(null, lose_sound), 500);
       setTimeout(endLevel, 1500);
     } else {
       notes[i].style.backgroundColor = colors[--color_count];
@@ -128,6 +135,7 @@ const click_note = (i) => {
     if (counter == 0 && flag) {
       score.textContent = (parseInt(score.textContent) + LEVEL).toString();
       disable_notes();
+      setTimeout(play_sound.bind(null, win_sound), 500);
       setTimeout(nextLevel, 1500);
     }
   }
