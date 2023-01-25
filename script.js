@@ -1,6 +1,7 @@
 let LEVEL = 3;
 let level_count = LEVEL - 1;
 const delay = 400;
+const level_delay = 1500;
 let generating_level = false;
 let counter = LEVEL;
 const colors = [
@@ -122,12 +123,12 @@ const click_note = (i) => {
     counter -= 1;
     if (i != correct_order[counter]) {
       flag = false;
-      notes[i].style.backgroundColor = "red";
+      notes[i].style.backgroundColor = "#ff6f91";
       notes[correct_order[counter]].style.backgroundColor = colors[color_count];
       notes[correct_order[counter]].classList.add("ds");
       disable_notes();
-      setTimeout(play_sound.bind(null, lose_sound), 500);
-      setTimeout(endLevel, 1500);
+      setTimeout(play_sound.bind(null, lose_sound), level_delay / 3);
+      setTimeout(endLevel, level_delay);
     } else {
       notes[i].style.backgroundColor = colors[--color_count];
     }
@@ -135,8 +136,8 @@ const click_note = (i) => {
     if (counter == 0 && flag) {
       score.textContent = (parseInt(score.textContent) + LEVEL).toString();
       disable_notes();
-      setTimeout(play_sound.bind(null, win_sound), 500);
-      setTimeout(nextLevel, 1500);
+      setTimeout(play_sound.bind(null, win_sound), level_delay / 3);
+      setTimeout(nextLevel, level_delay);
     }
   }
 };
