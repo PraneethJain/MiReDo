@@ -49,6 +49,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 
 .container {
@@ -95,6 +96,7 @@ img {
 .over {
   height: 100vh;
   width: 100vw;
+  background-color: white;
   font-size: 4rem;
   display: flex;
   flex-direction: column;
